@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
+
+// CSS files
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// data and logic files
+import './data/colors';
+
+// components
+import './components/Block';
+import PlayingField from './components/PlayingField';
+import ShowNextBlock from './components/ShowNextBlock';
+import Scoreboard from './components/Scoreboard';
+import Button from './components/Button';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentScore: 0,
+      currentLevel: 0,
+      grid: [], // [10][20] representing the playing field
+      currentPiece: [], // coordinates of current moving piece on grid
+      nextPiece: [],
+      counter: 0,
+      speed: 0,
+      gamePaused: true
+    };
+  }
+  render() {
+    return (
+      <div className="App">
+        Loading ...
+        <PlayingField />
+        <ShowNextBlock />
+        <Scoreboard />
+        <Button />
+        <Button />
+        <Button />
+      </div>
+    );
+  }
 }
 
 export default App;
