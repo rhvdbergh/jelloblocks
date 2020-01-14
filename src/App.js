@@ -29,7 +29,7 @@ class App extends React.Component {
 
     this.state = {
       currentScore: 0,
-      currentLevel: 0,
+      currentLevel: 1,
       grid: grid, // [x=10][y=24] representing the playing field
       currentPiece: constructPiece(selectNextColor()), // coordinates of current moving piece on grid
       nextPiece: selectNextColor(), // color of next piece
