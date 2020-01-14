@@ -34,7 +34,7 @@ class App extends React.Component {
       currentPiece: constructPiece(selectNextColor()), // coordinates of current moving piece on grid
       nextPiece: selectNextColor(), // color of next piece
       counter: 0,
-      speed: 0,
+      speed: 1,
       gamePaused: true
     };
 
