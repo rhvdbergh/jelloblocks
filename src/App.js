@@ -4,7 +4,8 @@ import React from 'react';
 import './App.css';
 
 // data and logic files
-import './data/colors';
+import colors from './data/colors';
+import { selectNextColor, constructPiece } from './data/utilities';
 
 // components
 import './components/Block';
@@ -17,17 +18,31 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // create an empty grid, filled with 0s
+    let grid = [];
+    for (let x = 0; x < 10; x++) {
+      grid.push([]);
+      for (let y = 0; y < 24; y++) {
+        grid[x].push(0);
+      }
+    }
+
     this.state = {
       currentScore: 0,
       currentLevel: 0,
-      grid: [], // [10][20] representing the playing field
-      currentPiece: [], // coordinates of current moving piece on grid
-      nextPiece: [],
+      grid: grid, // [x=10][y=24] representing the playing field
+      currentPiece: constructPiece(selectNextColor()), // coordinates of current moving piece on grid
+      nextPiece: selectNextColor(), // color of next piece
       counter: 0,
       speed: 0,
       gamePaused: true
     };
+
+    console.log(this.state);
   }
+
+  componentDidMount() {}
+
   render() {
     return (
       <div className="App">
