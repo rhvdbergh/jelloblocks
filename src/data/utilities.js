@@ -3,75 +3,91 @@ export const selectNextColor = () => {
 };
 
 export const constructPiece = color => {
+  let piece = [];
+
   switch (color) {
     case 0: // S shape
-      return [
-        [4, 22],
-        [4, 21],
-        [5, 21],
-        [6, 20]
+      piece = [
+        [4, 22, 0],
+        [4, 21, 0],
+        [5, 21, 0],
+        [6, 20, 0]
       ];
       break;
     case 1: // Z shape
-      return [
-        [5, 22],
-        [4, 21],
-        [5, 21],
-        [4, 21]
+      piece = [
+        [5, 22, 1],
+        [4, 21, 1],
+        [5, 21, 1],
+        [4, 21, 1]
       ];
       break;
     case 2: // T shape
-      return [
-        [4, 21],
-        [5, 21],
-        [6, 21],
-        [5, 22]
+      piece = [
+        [4, 21, 2],
+        [5, 21, 2],
+        [6, 21, 2],
+        [5, 22, 2]
       ];
       break;
     case 3: // L shape
-      return [
-        [4, 22],
-        [4, 21],
-        [4, 20],
-        [5, 20]
+      piece = [
+        [4, 22, 3],
+        [4, 21, 3],
+        [4, 20, 3],
+        [5, 20, 3]
       ];
       break;
     case 4: // reverse L shape
-      return [
-        [5, 22],
-        [5, 21],
-        [5, 20],
-        [4, 20]
+      piece = [
+        [5, 22, 4],
+        [5, 21, 4],
+        [5, 20, 4],
+        [4, 20, 4]
       ];
       break;
     case 5: // LINE shape
-      return [
-        [5, 23],
-        [5, 22],
-        [5, 21],
-        [5, 20]
+      piece = [
+        [5, 23, 5],
+        [5, 22, 5],
+        [5, 21, 5],
+        [5, 20, 5]
       ];
       break;
     case 6: // BLOCK shape
-      return [
-        [4, 21],
-        [5, 21],
-        [4, 20],
-        [5, 20]
+      piece = [
+        [4, 21, 6],
+        [5, 21, 6],
+        [4, 20, 6],
+        [5, 20, 6]
       ];
       break;
     default:
-      return [];
+      piece = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ];
+      break;
   }
+  return piece;
 };
 
 // places a piece on the grid
+// note that this mutates the grid array!
 export const insertPieceOnGrid = (piece, grid) => {
-  console.log('piece', piece);
-  let newGrid = grid;
   piece.forEach(block => {
-    newGrid[block[0]][block[1]] = 1;
+    grid[block[0]][block[1]] = block[2];
   });
 
-  return newGrid;
+  return grid;
+};
+
+// removes a piece from the grid
+// note that this mutates the grid array!
+export const removePieceFromGrid = (piece, grid) => {
+  piece.forEach(block => {
+    grid[block[0]][block[1]] = 0;
+  });
 };

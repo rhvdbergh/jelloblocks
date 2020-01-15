@@ -8,7 +8,8 @@ import colors from './data/colors';
 import {
   selectNextColor,
   constructPiece,
-  insertPieceOnGrid
+  insertPieceOnGrid,
+  removePieceFromGrid
 } from './data/utilities';
 
 // components
