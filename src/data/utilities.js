@@ -99,6 +99,5 @@ export const movePieceDown = (piece, grid) => {
     return [block[0], block[1] - 1, block[2]];
   });
   insertPieceOnGrid(newPos, grid);
-  // console.log('grid', grid, 'newPos', newPos);
   return newPos;
 };
