@@ -91,3 +91,14 @@ export const removePieceFromGrid = (piece, grid) => {
     grid[block[0]][block[1]] = 0;
   });
 };
+
+export const movePieceDown = (piece, grid) => {
+  removePieceFromGrid(piece, grid);
+
+  let newPos = piece.map((block, index) => {
+    return [block[0], block[1] - 1, block[2]];
+  });
+  insertPieceOnGrid(newPos, grid);
+  // console.log('grid', grid, 'newPos', newPos);
+  return newPos;
+};

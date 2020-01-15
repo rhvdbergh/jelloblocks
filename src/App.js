@@ -9,7 +9,8 @@ import {
   selectNextColor,
   constructPiece,
   insertPieceOnGrid,
-  removePieceFromGrid
+  removePieceFromGrid,
+  movePieceDown
 } from './data/utilities';
 
 // components
@@ -40,13 +41,52 @@ class App extends React.Component {
       nextPiece: selectNextColor(), // color of next piece
       counter: 0,
       speed: 1,
+      timer: null,
       gamePaused: true
     };
+
+    this.handleKeypress = this.handleKeypress.bind(this);
+    this.togglePause = this.togglePause.bind(this);
 
     console.log('state', this.state);
   }
 
-  componentDidMount() {}
+  togglePause() {
+    if (!this.state.gamePaused) {
+      // timer is running, so remove it to pause
+      clearInterval(this.state.timer);
+      this.setState({ gamePaused: true });
+    } else {
+      // timer is not running so add one to start game
+      let fallSpeed = (5 - this.state.speed) * 1000;
+      this.setState({
+        timer: setInterval(() => {
+          let movedPiece = movePieceDown(
+            this.state.currentPiece,
+            this.state.grid
+          );
+          this.setState({ currentPiece: movedPiece });
+          console.log(this.state.grid);
+        }, fallSpeed),
+        gamePaused: false
+      });
+    }
+  }
+
+  handleKeypress(evt) {
+    console.log('evt', evt); // TODO: use evt to move pieces around
+  }
+
+  componentDidMount() {
+    // add the first piece on the grid
+    insertPieceOnGrid(this.state.currentPiece, this.state.grid);
+
+    // TODO: implement
+    document.addEventListener('keydown', this.handleKeypress);
+
+    // unpause game to start
+    this.togglePause();
+  }
 
   render() {
     return (
