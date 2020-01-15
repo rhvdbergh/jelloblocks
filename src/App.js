@@ -5,7 +5,11 @@ import './App.css';
 
 // data and logic files
 import colors from './data/colors';
-import { selectNextColor, constructPiece } from './data/utilities';
+import {
+  selectNextColor,
+  constructPiece,
+  insertPieceOnGrid
+} from './data/utilities';
 
 // components
 import './components/Block';
@@ -38,7 +42,7 @@ class App extends React.Component {
       gamePaused: true
     };
 
-    console.log(this.state);
+    console.log('state', this.state);
   }
 
   componentDidMount() {}
