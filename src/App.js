@@ -10,7 +10,8 @@ import {
   constructPiece,
   insertPieceOnGrid,
   removePieceFromGrid,
-  movePieceDown
+  movePieceDown,
+  findDownwardFacingBlocks
 } from './data/utilities';
 
 // components
@@ -66,7 +67,6 @@ class App extends React.Component {
             this.state.grid
           );
           this.setState({ currentPiece: movedPiece });
-          console.log(this.state.grid);
         }, fallSpeed),
         gamePaused: false
       });

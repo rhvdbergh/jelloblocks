@@ -11,15 +11,15 @@ export const constructPiece = color => {
         [4, 22, 0],
         [4, 21, 0],
         [5, 21, 0],
-        [6, 20, 0]
+        [5, 20, 0]
       ];
       break;
     case 1: // Z shape
       piece = [
         [5, 22, 1],
-        [4, 21, 1],
         [5, 21, 1],
-        [4, 21, 1]
+        [4, 21, 1],
+        [4, 20, 1]
       ];
       break;
     case 2: // T shape
@@ -27,7 +27,7 @@ export const constructPiece = color => {
         [4, 21, 2],
         [5, 21, 2],
         [6, 21, 2],
-        [5, 22, 2]
+        [5, 20, 2]
       ];
       break;
     case 3: // L shape
@@ -35,7 +35,7 @@ export const constructPiece = color => {
         [4, 22, 3],
         [4, 21, 3],
         [4, 20, 3],
-        [5, 20, 3]
+        [5, 22, 3]
       ];
       break;
     case 4: // reverse L shape
@@ -43,7 +43,7 @@ export const constructPiece = color => {
         [5, 22, 4],
         [5, 21, 4],
         [5, 20, 4],
-        [4, 20, 4]
+        [4, 22, 4]
       ];
       break;
     case 5: // LINE shape
@@ -100,4 +100,24 @@ export const movePieceDown = (piece, grid) => {
   });
   insertPieceOnGrid(newPos, grid);
   return newPos;
+};
+
+export const findDownwardFacingBlocks = piece => {
+  let down = JSON.parse(JSON.stringify(piece));
+  let toBeRemoved = [];
+  for (let a = 0; a < 4; a++) {
+    for (let b = 0; b < 4; b++) {
+      if (down[a][1] - 1 === down[b][1] && down[a][0] === down[b][0]) {
+        toBeRemoved.push(a);
+      }
+    }
+  }
+  // the indices of the entries to be removed will be from small to large,
+  // so start from the back so we only change the back and not the front
+  // if we did the latter the indices of the rest of the toBeRemoved entries will be incorrect
+  console.log(toBeRemoved);
+  for (let i = toBeRemoved.length - 1; i > -1; i--) {
+    down.splice(toBeRemoved[i], 1);
+  }
+  console.log('to be returned', down);
 };
