@@ -11,7 +11,9 @@ import {
   insertPieceOnGrid,
   removePieceFromGrid,
   movePieceDown,
-  findDownwardFacingBlocks
+  findDownwardFacingBlocks,
+  findLeftwardFacingBlocks,
+  findRightwardFacingBlocks
 } from './data/utilities';
 
 // components

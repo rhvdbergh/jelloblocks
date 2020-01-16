@@ -103,6 +103,7 @@ export const movePieceDown = (piece, grid) => {
 };
 
 export const findDownwardFacingBlocks = piece => {
+  // deep copy the array
   let down = JSON.parse(JSON.stringify(piece));
   let toBeRemoved = [];
   for (let a = 0; a < 4; a++) {
@@ -115,9 +116,48 @@ export const findDownwardFacingBlocks = piece => {
   // the indices of the entries to be removed will be from small to large,
   // so start from the back so we only change the back and not the front
   // if we did the latter the indices of the rest of the toBeRemoved entries will be incorrect
-  console.log(toBeRemoved);
   for (let i = toBeRemoved.length - 1; i > -1; i--) {
     down.splice(toBeRemoved[i], 1);
   }
-  console.log('to be returned', down);
+  return down;
+};
+
+export const findLeftwardFacingBlocks = piece => {
+  // deep copy the array
+  let left = JSON.parse(JSON.stringify(piece));
+  let toBeRemoved = [];
+  for (let a = 0; a < 4; a++) {
+    for (let b = 0; b < 4; b++) {
+      if (left[a][1] === left[b][1] && left[a][0] - 1 === left[b][0]) {
+        toBeRemoved.push(a);
+      }
+    }
+  }
+  // the indices of the entries to be removed will be from small to large,
+  // so start from the back so we only change the back and not the front
+  // if we did the latter the indices of the rest of the toBeRemoved entries will be incorrect
+  for (let i = toBeRemoved.length - 1; i > -1; i--) {
+    left.splice(toBeRemoved[i], 1);
+  }
+  return left;
+};
+
+export const findRightwardFacingBlocks = piece => {
+  // deep copy the array
+  let right = JSON.parse(JSON.stringify(piece));
+  let toBeRemoved = [];
+  for (let a = 0; a < 4; a++) {
+    for (let b = 0; b < 4; b++) {
+      if (right[a][1] === right[b][1] && right[a][0] + 1 === right[b][0]) {
+        toBeRemoved.push(a);
+      }
+    }
+  }
+  // the indices of the entries to be removed will be from small to large,
+  // so start from the back so we only change the back and not the front
+  // if we did the latter the indices of the rest of the toBeRemoved entries will be incorrect
+  for (let i = toBeRemoved.length - 1; i > -1; i--) {
+    right.splice(toBeRemoved[i], 1);
+  }
+  return right;
 };
