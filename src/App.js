@@ -13,7 +13,8 @@ import {
   movePieceDown,
   findDownwardFacingBlocks,
   findLeftwardFacingBlocks,
-  findRightwardFacingBlocks
+  findRightwardFacingBlocks,
+  isStuck
 } from './data/utilities';
 
 // components
@@ -64,12 +65,24 @@ class App extends React.Component {
       let fallSpeed = (5 - this.state.speed) * 1000;
       this.setState({
         timer: setInterval(() => {
-          let movedPiece = movePieceDown(
-            this.state.currentPiece,
-            this.state.grid
-          );
-          this.setState({ currentPiece: movedPiece });
-        }, fallSpeed),
+          if (!isStuck(findDownwardFacingBlocks(this.state.currentPiece))) {
+            let movedPiece = movePieceDown(
+              this.state.currentPiece,
+              this.state.grid
+            );
+            this.setState({ currentPiece: movedPiece });
+            console.log(this.state.grid);
+          } else {
+            // the piece is stuck
+            let newNextPiece = selectNextColor();
+            let newCurrentPiece = constructPiece(this.state.nextPiece);
+            this.setState({
+              nextPiece: newNextPiece,
+              currentPiece: newCurrentPiece
+            });
+            console.log('returned false');
+          } // end else
+        }, 500),
         gamePaused: false
       });
     }

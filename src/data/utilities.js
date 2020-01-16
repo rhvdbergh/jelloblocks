@@ -161,3 +161,11 @@ export const findRightwardFacingBlocks = piece => {
   }
   return right;
 };
+
+export const isStuck = relevantBlocks => {
+  let stuck = false;
+  relevantBlocks.forEach(block => {
+    if (block[1] <= 0) stuck = true;
+  });
+  return stuck;
+};
